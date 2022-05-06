@@ -11,9 +11,24 @@ const Login = (props) => {
 
 const Container = styled.section`
   overflow: hidden;
-  displaye: flex;
+  display: flex;
+  flex: column;
+  text-align: center;
+  height: 100vh;
 `;
 
-const Content = styled.div``;
+const Content = styled.div`
+  margin-bottom: 10vw;
+  width: 100%;
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 80px 40px;
+  height: 100%;
+`;
 
 export default Login;
