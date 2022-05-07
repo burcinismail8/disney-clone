@@ -2,3 +2,4 @@
 2. JavaScript
 3. Styled-components
 4. react-router-dom
+5. Firebase
