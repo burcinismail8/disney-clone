@@ -1,22 +1,21 @@
 import React from "react";
 import styled from "styled-components";
+import ImgSlider from "./ImgSlider";
 const Home = () => {
   return (
     <Container>
-      <h2>Hello</h2>
-      <h2>Hello</h2>
-      <h2>Hello</h2>
+      <ImgSlider />
     </Container>
   );
 };
 
 const Container = styled.main`
   position: relative;
-  min-height: calc(100vh-250px);
+  min-height: calc(100vh - 250px);
   overflow-x: hidden;
   display: block;
   top: 72px;
-  padding: 0 calc(3.5vw+5px);
+  padding: 0 calc(3.5vw + 5px);
 
   &::after {
     background: url("/images/home-background.png") center center / cover

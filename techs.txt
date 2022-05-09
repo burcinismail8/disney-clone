@@ -4,3 +4,5 @@
 4. react-router-dom
 5. Firebase - Google auth
 6. Redux
+7. React slick
+8. slick-carousel
