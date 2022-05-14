@@ -1,16 +1,25 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 const Trending = () => {
+  let movies = useSelector((state) => state.movies.trending);
+
   return (
     <Container>
       <h4>Trending</h4>
       <Content>
-        <Wrap>
-          <Link to="/">
-            <img src="" alt="" />
-          </Link>
-        </Wrap>
+        {movies &&
+          movies.map((movie, key) => {
+            return (
+              <Wrap key={key}>
+                {movie.id}
+                <Link to={"/details/" + movie.id}>
+                  <img src={movie.cardImg} alt={movie.title} />
+                </Link>
+              </Wrap>
+            );
+          })}
       </Content>
     </Container>
   );
@@ -45,7 +54,6 @@ const Wrap = styled.div`
     inset: 0px;
     display: block;
     height: 100%;
-    object-fit: cover;
     opacity: 1;
     position: absolute;
     transition: opacity 500ms ease-in-out 0s;
