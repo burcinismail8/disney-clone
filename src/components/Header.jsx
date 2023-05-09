@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { auth, provider } from "../firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   selectUserName,
   selectUserPhoto,
@@ -13,8 +13,10 @@ import {
 const Header = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const username = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
+  const [loged, setLoged] = useState(false);
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
@@ -26,23 +28,30 @@ const Header = (props) => {
   }, [username]);
 
   const handleAuth = () => {
-    if (!username) {
-      signInWithPopup(auth, provider)
-        .then((result) => {
-          setUser(result.user);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else if (username) {
-      signOut(auth)
-        .then(() => {
-          dispatch(setSignOutUser());
-          navigate("/");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    // if (!username) {
+    //   signInWithPopup(auth, provider)
+    //     .then((result) => {
+    //       setUser(result.user);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // } else if (username) {
+    //   signOut(auth)
+    //     .then(() => {
+    //       dispatch(setSignOutUser());
+    //       navigate("/");
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // }
+    if (location.pathname != "/") {
+      setLoged(false);
+      navigate("/");
+    } else {
+      setLoged(true);
+      navigate("/home");
     }
   };
 
@@ -60,7 +69,7 @@ const Header = (props) => {
       <Logo>
         <img src="/images/logo.svg" alt="" />
       </Logo>
-      {!username ? (
+      {!loged ? (
         <Login onClick={handleAuth}>LOGIN</Login>
       ) : (
         <>
@@ -91,7 +100,12 @@ const Header = (props) => {
             </a>
           </NavMenu>
           <SignOut>
-            <UserImg src={userPhoto} alt={username} />
+            <UserImg
+              src={
+                "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000"
+              }
+              alt={username}
+            />
             <Dropdown>
               <span onClick={handleAuth}>Sign out</span>
             </Dropdown>
