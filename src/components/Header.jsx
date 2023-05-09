@@ -18,14 +18,14 @@ const Header = (props) => {
   const userPhoto = useSelector(selectUserPhoto);
   const [loged, setLoged] = useState(false);
 
-  useEffect(() => {
-    auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        setUser(user);
-        navigate("/home");
-      }
-    });
-  }, [username]);
+  // useEffect(() => {
+  //   auth.onAuthStateChanged(async (user) => {
+  //     if (user) {
+  //       setUser(user);
+  //       navigate("/home");
+  //     }
+  //   });
+  // }, [username]);
 
   const handleAuth = () => {
     // if (!username) {
@@ -99,7 +99,7 @@ const Header = (props) => {
               <span>SERIES</span>
             </a>
           </NavMenu>
-          <SignOut>
+          <SignOut onClick={handleAuth}>
             <UserImg
               src={
                 "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000"
@@ -107,7 +107,7 @@ const Header = (props) => {
               alt={username}
             />
             <Dropdown>
-              <span onClick={handleAuth}>Sign out</span>
+              <span>Sign out</span>
             </Dropdown>
           </SignOut>
         </>
